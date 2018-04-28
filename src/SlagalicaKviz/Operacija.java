@@ -14,6 +14,7 @@ public class Operacija extends Node {
         PLUS, MINUS, MULTIPLY, DIVIDE
 
     }
+    //hwquhioq
 
     @Override
     public int calculate() {
