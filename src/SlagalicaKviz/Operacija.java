@@ -25,6 +25,8 @@ public class Operacija extends Node {
     public int calculate() {
         if(op.equals("+")) return leftNode.calculate() + rightNode.calculate();
         else if(op.equals("-")) return  leftNode.calculate() - rightNode.calculate();
+        else if(op.equals("*")) return leftNode.calculate() * rightNode.calculate();
+        else if(op.equals("/")) return leftNode.calculate() / rightNode.calculate();
 
         return 0;
     }

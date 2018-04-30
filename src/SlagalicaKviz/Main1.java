@@ -1,22 +1,34 @@
 package SlagalicaKviz;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class Main1 {
 
     public static void main(String[] args){
 
-        Const a = new Const("5");
-        Const b = new Const("3");
-        Const c = new Const("2");
+        Random rand = new Random();
+        int[] set1 = {10, 15, 20, 25};
+        int[] set2 = {25, 50, 75, 100};
 
-        Operacija op1 = new Operacija("+");
-        Operacija op2 = new Operacija("-");
+        for(int i = 0; i <= 3; i++)
+            System.out.print((rand.nextInt(8) + 1) + " ");
 
-        op1.setLeftNode(a);
-        op1.setRightNode(op2);
-        op2.setLeftNode(b);
-        op2.setRightNode(c);
+        System.out.print("   ");
+        System.out.print(set1[rand.nextInt(3)]);
+        System.out.print("   ");
+        System.out.println(set2[rand.nextInt(3)]);
 
-        System.out.println("Rezultat je: " + op1.calculate());
+        System.out.println("Trazi se broj: " + rand.nextInt(100) + 1);
+        System.out.print("Unesite vase resenje: ");
+
+        Scanner sc = new Scanner(System.in);
+        Unos unos = new Unos(sc.next());
+
+
+
+
+
 
 
 
