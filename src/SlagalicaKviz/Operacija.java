@@ -1,25 +1,31 @@
 package SlagalicaKviz;
 
-
 public class Operacija extends Node {
 
-    private Node leftNode;
-    private Node rightNode;
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
+    private Node leftNode = null;
+    private Node rightNode = null;
+    private String op;
 
-    private enum operation {
-        PLUS, MINUS, MULTIPLY, DIVIDE
 
+
+    public Operacija(String op){
+        this.op = op;
     }
-    //hwquhioq
+
+    public void setLeftNode(Node leftNode) {
+        this.leftNode = leftNode;
+    }
+
+    public void setRightNode(Node rightNode) {
+        this.rightNode = rightNode;
+    }
+
 
     @Override
     public int calculate() {
-        switch (operation) {
-            PLUS : r
-        }
+        if(op.equals("+")) return leftNode.calculate() + rightNode.calculate();
+        else if(op.equals("-")) return  leftNode.calculate() - rightNode.calculate();
+
+        return 0;
     }
 }
