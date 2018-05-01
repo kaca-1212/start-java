@@ -2,9 +2,9 @@ package SlagalicaKviz;
 
 public class Zagrada extends Node {
 
-    private String zagrada;
+    private char zagrada;
 
-    public Zagrada (String zagrada){
+    public Zagrada (char zagrada){
         this.zagrada = zagrada;
     }
 

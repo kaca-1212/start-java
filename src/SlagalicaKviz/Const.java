@@ -3,14 +3,14 @@ package SlagalicaKviz;
 
 public class Const extends Node {
 
-    private String value;
+    private int value;
 
-    public Const(String value) {
+    public Const(int value) {
         this.value = value;
     }
 
     public int calculate() {
-        return Integer.parseInt(value);
+        return value;
     }
 
 }
