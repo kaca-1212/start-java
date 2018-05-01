@@ -11,13 +11,13 @@ public class Unos {
     }
 
 
-    private ArrayList<Node> tokenize(){
+    public ArrayList<Node> tokenize(){
         char[] nizKaraktera = unos.toCharArray();
         ArrayList<Node> listOfNodes = new ArrayList<Node>();
         int num = 0;
         boolean ind = false;
         for(int i = 0; i < nizKaraktera.length; i++){
-            if(Character.isDigit(nizKaraktera[i] - '0')){
+            if(Character.isDigit(nizKaraktera[i])){
                 num = (nizKaraktera[i] - '0') + 10 * num;
                 ind = true;
             }
@@ -32,9 +32,12 @@ public class Unos {
 
             if(nizKaraktera[i] == ')' || nizKaraktera[i] == '(')
                 listOfNodes.add(new Zagrada(nizKaraktera[i]));
+
         }
 
-        if(ind) num = (nizKaraktera[nizKaraktera.length -1] - '0') + 10 * num;
+        if(ind) {
+            listOfNodes.add(new Const(num));
+        }
 
         return listOfNodes;
 

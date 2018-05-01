@@ -13,5 +13,10 @@ public class Const extends Node {
         return value;
     }
 
+    @Override
+    public void toString2() {
+        System.out.println(Integer.toString(value));
+    }
+
 }
 

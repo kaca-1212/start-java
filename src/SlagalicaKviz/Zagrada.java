@@ -12,4 +12,9 @@ public class Zagrada extends Node {
     public int calculate() {
         return 0;
     }
+
+    @Override
+    public void toString2() {
+        System.out.println(zagrada);
+    }
 }

@@ -30,4 +30,8 @@ public class Operacija extends Node {
 
         return 0;
     }
+
+    public void toString2(){
+        System.out.println(op);
+    }
 }

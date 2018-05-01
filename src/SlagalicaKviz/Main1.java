@@ -1,5 +1,6 @@
 package SlagalicaKviz;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -30,7 +31,12 @@ public class Main1 {
         System.out.print("Unesite vase resenje: ");
 
         Scanner sc = new Scanner(System.in);
-        Unos unos = new Unos(sc.next());
+        Unos unos = new Unos(sc.nextLine());
+
+        ArrayList<Node> lista = unos.tokenize();
+        for (Node node : lista){
+            node.toString2();
+        }
 
 
     }
