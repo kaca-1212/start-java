@@ -59,48 +59,56 @@ public class Unos {
 
     private boolean checkOrder() {
         ArrayList<Node> lista = tokenize();
-        Node[] arrayOfNodes = new Node[lista.size()];
-        int i = 0;
-        for (Node node : lista) {
-            arrayOfNodes[i] = node;
-            i++;
-        }
-        if(arrayOfNodes[0] instanceof Operacija) {System.out.println(1); return false;}
-        if(arrayOfNodes[i - 1] instanceof Operacija) {System.out.println(2); return false;}
+        int size = lista.size();
 
+        if(lista.get(0) instanceof Operacija) return false;
+        if(lista.get(size - 1) instanceof Operacija) return false;
 
-        for (int j = 0; j < (i - 1); j++) {
-            if (arrayOfNodes[j] instanceof Const) {
-                if(arrayOfNodes[j + 1] instanceof Operacija || ((Zagrada) arrayOfNodes[j + 1]).getZagrada() == ')')
-                        {System.out.println(3); return false; }  }
-            else if (arrayOfNodes[j + 1] instanceof Operacija) {
-                if(arrayOfNodes[j] instanceof Const ||
-                    ((Zagrada) arrayOfNodes[j]).getZagrada() == ')')
-                {System.out.println(4); return false;}   }
-            else if (arrayOfNodes[j] instanceof Operacija)  {
-                if (arrayOfNodes[j + 1] instanceof Const ||
-                    ((Zagrada) arrayOfNodes[j + 1]).getZagrada() == '(')
-                {System.out.println(5); return false;}  }
-            else if (arrayOfNodes[j + 1] instanceof Const){
-                if (arrayOfNodes[j] instanceof Operacija ||
-                    ((Zagrada) arrayOfNodes[j]).getZagrada() == '(')
-                {System.out.println(6); return false;}        }
-            else if (((Zagrada) arrayOfNodes[j]).getZagrada() == ')'){
-                if (arrayOfNodes[j + 1] instanceof Operacija ||
-                        ((Zagrada) arrayOfNodes[j + 1]).getZagrada() == ')')
-                {System.out.println(7); return false;} }
-            else if (((Zagrada) arrayOfNodes[j + 1]).getZagrada() == ')'){
-                if (arrayOfNodes[j] instanceof Const ||
-                    ((Zagrada) arrayOfNodes[j]).getZagrada() == ')')
-                {System.out.println(8); return false;}  }
-            else if (((Zagrada) arrayOfNodes[j]).getZagrada() == '('){
-                if(arrayOfNodes[j + 1] instanceof Const ||
-                        ((Zagrada) arrayOfNodes[j + 1]).getZagrada() == '(')
-                {System.out.println(9); return false;}  }
-            else if (((Zagrada) arrayOfNodes[j + 1]).getZagrada() == '('){
-                if (arrayOfNodes[j] instanceof Operacija ||
-                    ((Zagrada) arrayOfNodes[j + 1]).getZagrada() == '(')
-                {System.out.println(10); return false;}    }
+        for(int i = 1; i < size - 2; i++) {
+
+            if (lista.get(i) instanceof Const) {
+                if (lista.get(i - 1) instanceof Const)
+                    return false;
+                if (lista.get(i-1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == ')')
+                    return false;
+                if (lista.get(i + 1) instanceof Const)
+                    return false;
+                if(lista.get(i+1) instanceof Zagrada && ((Zagrada) lista.get(i + 1)).getZagrada() == '(')
+                    return false;
+            }
+            if (lista.get(i) instanceof Operacija) {
+                if (lista.get(i - 1) instanceof Operacija)
+                    return false;
+                if(lista.get(i-1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == '(')
+                    return false;
+                if (lista.get(i + 1) instanceof Operacija)
+                    return false;
+                if(lista.get(i+1) instanceof Zagrada && ((Zagrada) lista.get(i + 1)).getZagrada() == ')')
+                    return false;
+            }
+            if (lista.get(i) instanceof Zagrada) {
+                if (((Zagrada) lista.get(i)).getZagrada() == '(') {
+                    if (lista.get(i - 1) instanceof Const)
+                        return false;
+                    if (lista.get(i - 1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == ')')
+                        return false;
+                    if (lista.get(i + 1) instanceof Operacija)
+                        return false;
+                    if (lista.get(i + 1) instanceof Zagrada && ((Zagrada) lista.get(i + 1)).getZagrada() == ')')
+                        return false;
+
+                }
+                if (((Zagrada) lista.get(i)).getZagrada() == ')') {
+                    if (lista.get(i - 1) instanceof Operacija)
+                        return false;
+                    if (lista.get(i - 1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == '(')
+                        return false;
+                    if (lista.get(i - 1) instanceof Operacija)
+                        return false;
+                    if (lista.get(i - 1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == '(')
+                        return false;
+                }
+            }
         }
         return true;
     }
