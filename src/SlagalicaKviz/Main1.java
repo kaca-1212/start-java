@@ -33,6 +33,8 @@ public class Main1 {
         Scanner sc = new Scanner(System.in);
         Unos unos = new Unos(sc.nextLine());
 
+        unos.check();
+
         ArrayList<Node> lista = unos.tokenize();
         for (Node node : lista){
             node.toString2();

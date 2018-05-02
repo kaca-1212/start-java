@@ -17,4 +17,8 @@ public class Zagrada extends Node {
     public void toString2() {
         System.out.println(zagrada);
     }
+
+    public char getZagrada() {
+        return zagrada;
+    }
 }
