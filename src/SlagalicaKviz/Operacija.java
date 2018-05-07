@@ -31,6 +31,15 @@ public class Operacija extends Node {
         return 0;
     }
 
+    public Node getLeftNode() {
+        return leftNode;
+    }
+
+    public Node getRightNode() {
+
+        return rightNode;
+    }
+
     public void toString2(){
         System.out.println(op);
     }
