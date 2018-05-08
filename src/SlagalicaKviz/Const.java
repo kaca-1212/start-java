@@ -15,7 +15,7 @@ public class Const extends Node {
 
     @Override
     public void toString2() {
-        System.out.println(Integer.toString(value));
+        System.out.print(Integer.toString(value));
     }
 
 }

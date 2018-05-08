@@ -40,7 +40,14 @@ public class Operacija extends Node {
         return rightNode;
     }
 
+    public char getOp() {
+        return op;
+    }
+
     public void toString2(){
-        System.out.println(op);
+
+        leftNode.toString2();
+        System.out.print(op);
+        rightNode.toString2();
     }
 }

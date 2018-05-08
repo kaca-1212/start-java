@@ -36,14 +36,10 @@ public class Main1 {
         unos.check();
 
         ArrayList<Node> lista = unos.tokenize();
-        for (Node node : lista){
-            node.toString2();
-        }
-
         OurTree drvo = new OurTree();
         Operacija root = (Operacija)(drvo.makeATree(lista));
         root.toString2();
-        root.getLeftNode().toString2();
+        System.out.println("");
         System.out.println("Rezultat je: " + Integer.toString(root.calculate()));
 
 

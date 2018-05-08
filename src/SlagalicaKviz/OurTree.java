@@ -9,28 +9,33 @@ public class OurTree {
     }
 
     public static Node makeATree(ArrayList<Node> lista){
-        int ind = -1;
-        Node root = null;
-        Operacija node1 = new Operacija('-');
-        for(Node node : lista){
-            if (node instanceof Const) {
-                if (node1.getLeftNode() instanceof Const)
-                    node1.setRightNode((Const) node);
-                else
-                    node1.setLeftNode((Const) node);
+        Operacija root = (Operacija)lista.get(1);
+        Operacija lastOp = root;
+        Const sonLastOp;
+        root.setLeftNode(lista.get(0));
+        for(int i = 2; i < lista.size(); i++) {
+            if (lista.get(i) instanceof Const)
+                lastOp.setRightNode(lista.get(i));
+            if (lista.get(i) instanceof Operacija) {
+
+                if ((((Operacija) lista.get(i)).getOp() == '*') || (((Operacija) lista.get(i)).getOp() == '/')) {
+                    sonLastOp = (Const) lastOp.getRightNode();
+                    lastOp.setRightNode(lista.get(i));
+                    ((Operacija) lista.get(i)).setLeftNode(sonLastOp);
+                }
+
+                if ((((Operacija) lista.get(i)).getOp() == '+') || (((Operacija) lista.get(i)).getOp() == '-')) {
+
+                    ((Operacija) lista.get(i)).setLeftNode(root);
+                    root = (Operacija) lista.get(i);
+                }
+                lastOp = (Operacija) lista.get(i);
             }
 
-             if (node instanceof Operacija){
-                    node1 = (Operacija)node;
-                    root = node1;
-
-             }
-
-
         }
-        root.toString2();
         return root;
-    }
 
 
+
+}
 }
