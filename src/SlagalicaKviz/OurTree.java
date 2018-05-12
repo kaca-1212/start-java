@@ -8,7 +8,7 @@ public class OurTree {
 
     }
 
-    public static Node makeATree(ArrayList<Node> lista){
+    public Node makeATree(ArrayList<Node> lista){
         Operacija root = null;
         Operacija lastOp = null;
         Operacija rootBracket = null;

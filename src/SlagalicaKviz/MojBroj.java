@@ -21,27 +21,24 @@ public class MojBroj{
         nizOdabranih = new ArrayList<Const>();
         for(int i = 0; i <= 3; i++) {
             nizOdabranih.add(new Const(rand.nextInt(8) + 1));
-            System.out.print((nizOdabranih.get(i)).calculate() + " ");
         }
 
-        System.out.print("   ");
         int s_1 = rand.nextInt(3);
         nizOdabranih.add(new Const(set1[s_1]));
-        System.out.print(set1[s_1]);
-        System.out.print("   ");
         int s_2 = rand.nextInt(3);
         nizOdabranih.add(new Const(set2[s_2]));
-        System.out.println(set2[s_2]);
-
 
         result = rand.nextInt(1000) + 1;
-        System.out.println("Trazi se broj: " +  result);
-        System.out.print("Unesite vase resenje: ");
+        show();
         ObradaUnosa();
     }
 
     public void show() {
-        // ponudjene brojeve resenje i slicno
+        for(int i = 0; i <= 3; i++)
+        System.out.print((nizOdabranih.get(i)).calculate() + " ");
+        System.out.println("  " + nizOdabranih.get(4).calculate() + "  " + nizOdabranih.get(5).calculate());
+        System.out.println("Trazi se broj: " +  result);
+        System.out.print("Unesite vase resenje: ");
     }
 
     private void ObradaUnosa(){
