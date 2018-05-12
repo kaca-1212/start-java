@@ -113,6 +113,7 @@ public class Unos {
         return true;
     }
 
+
     public void check(){
         if (!(checkBrackets() && checkOrder())){
             System.out.println("Niste lepo uneli resenje!");

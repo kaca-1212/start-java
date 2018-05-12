@@ -18,5 +18,16 @@ public class Const extends Node {
         System.out.print(Integer.toString(value));
     }
 
+    public boolean equals(Object object)
+    {
+        boolean sameSame = false;
+
+        if (object != null && object instanceof Const)
+        {
+            sameSame = this.value == ((Const) object).value;
+        }
+
+        return sameSame;
+    }
 }
 
