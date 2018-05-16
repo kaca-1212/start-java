@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 public class Unos {
     private String unos;
+    private ArrayList<Node> lista;
 
     public Unos(String unos){
         this.unos = unos;
+        lista = tokenize();
     }
-
 
     public ArrayList<Node> tokenize(){
         char[] nizKaraktera = unos.toCharArray();
@@ -42,8 +43,7 @@ public class Unos {
         return listOfNodes;
     }
 
-    private boolean checkBrackets(){
-        ArrayList<Node> lista = tokenize();
+    private void checkBrackets() throws MyException{
         int i = 0;
         for(Node node : lista) {
             if (node instanceof Zagrada && ((Zagrada) node).getZagrada() == '(')
@@ -51,77 +51,90 @@ public class Unos {
             if (node instanceof Zagrada && ((Zagrada) node).getZagrada() == ')')
                 i--;
             if(i < 0)
-                return false;
+                throw new MyException("Zagrade nisu dobro uparene!");
         }
-        if(i == 0) return true;
-        else return false;
+        if(i != 0)
+            throw new MyException("Visak zagrada!");
     }
 
-    private boolean checkOrder() {
-        ArrayList<Node> lista = tokenize();
+    private void checkOrder() throws MyException{
         int size = lista.size();
 
-        if(lista.get(0) instanceof Operacija) return false;
-        if(lista.get(size - 1) instanceof Operacija) return false;
+        if(lista.get(0) instanceof Operacija) throw new MyException("Nije dobar redosled operacija!");
+        if(lista.get(size - 1) instanceof Operacija) throw new MyException("Nije dobar redosled operacija!");
 
         for(int i = 1; i < size - 2; i++) {
 
             if (lista.get(i) instanceof Const) {
                 if (lista.get(i - 1) instanceof Const)
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
                 if (lista.get(i-1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == ')')
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
                 if (lista.get(i + 1) instanceof Const)
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
                 if(lista.get(i+1) instanceof Zagrada && ((Zagrada) lista.get(i + 1)).getZagrada() == '(')
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
             }
             if (lista.get(i) instanceof Operacija) {
                 if (lista.get(i - 1) instanceof Operacija)
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
                 if(lista.get(i-1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == '(')
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
                 if (lista.get(i + 1) instanceof Operacija)
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
                 if(lista.get(i+1) instanceof Zagrada && ((Zagrada) lista.get(i + 1)).getZagrada() == ')')
-                    return false;
+                    throw new MyException("Nije dobar redosled operacija!");
             }
             if (lista.get(i) instanceof Zagrada) {
                 if (((Zagrada) lista.get(i)).getZagrada() == '(') {
                     if (lista.get(i - 1) instanceof Const)
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                     if (lista.get(i - 1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == ')')
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                     if (lista.get(i + 1) instanceof Operacija)
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                     if (lista.get(i + 1) instanceof Zagrada && ((Zagrada) lista.get(i + 1)).getZagrada() == ')')
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
 
                 }
                 if (((Zagrada) lista.get(i)).getZagrada() == ')') {
                     if (lista.get(i - 1) instanceof Operacija)
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                     if (lista.get(i - 1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == '(')
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                     if (lista.get(i - 1) instanceof Operacija)
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                     if (lista.get(i - 1) instanceof Zagrada && ((Zagrada) lista.get(i - 1)).getZagrada() == '(')
-                        return false;
+                        throw new MyException("Nije dobar redosled operacija!");
                 }
             }
         }
-        return true;
     }
 
+    private void checkEntry(ArrayList<Const> nizOdabranih) throws MyException{
+        ArrayList<Node> listacpy = new ArrayList<Node>(lista);
 
-    public void check(){
-        if (!(checkBrackets() && checkOrder())){
-            System.out.println("Niste lepo uneli resenje!");
-            System.exit(1);
+        for (Node node : listacpy){
+            if(node instanceof Const){
+                if (!( nizOdabranih.contains((Const) node))){
+                    throw new MyException("Izabrali ste brojeve koji nisu ponudjeni!");
+                }
+                else
+                    nizOdabranih.remove((Const) node);
+            }
+            else
+                continue;
+
         }
     }
 
+    public ArrayList<Node> getList() { return lista;}
 
+    public void check(ArrayList<Const> nizOdabranih) throws MyException{
+        checkBrackets();
+        checkOrder();
+        checkEntry(nizOdabranih);
+    }
 
     }
 

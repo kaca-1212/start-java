@@ -14,24 +14,24 @@ public class TestKlasa {
 
     public void testiraj(){
         int ind = 1;
-        OurTree drvo = new OurTree();
-        if(((Operacija) drvo.makeATree((new Unos(u1).tokenize()))).calculate() != 3) {
+        MojBroj mb = new MojBroj();
+        if(((Operacija) mb.makeATree((new Unos(u1).tokenize()))).calculate() != 3) {
             System.out.println("Prvi izraz ne prolazi.");
             ind = -1;
         }
-        if(((Operacija) drvo.makeATree((new Unos(u2).tokenize()))).calculate() != 27){
+        if(((Operacija) mb.makeATree((new Unos(u2).tokenize()))).calculate() != 27){
             System.out.println("Drugi izraz ne prolazi.");
             ind = -1;
         }
-        if(((Operacija) drvo.makeATree((new Unos(u3).tokenize()))).calculate() != 1){
+        if(((Operacija) mb.makeATree((new Unos(u3).tokenize()))).calculate() != 1){
             System.out.println("Treci izraz ne prolazi.");
             ind = -1;
         }
-        if(((Operacija) drvo.makeATree((new Unos(u4).tokenize()))).calculate() != -2){
+        if(((Operacija) mb.makeATree((new Unos(u4).tokenize()))).calculate() != -2){
             System.out.println("Cetvrti izraz ne prolazi.");
             ind = -1;
         }
-        if(((Operacija) drvo.makeATree((new Unos(u5).tokenize()))).calculate() != -1){
+        if(((Operacija) mb.makeATree((new Unos(u5).tokenize()))).calculate() != -1){
             System.out.println("Peti izraz ne prolazi.");
             ind = -1;
         }
