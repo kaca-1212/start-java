@@ -1,22 +1,34 @@
 package SlagalicaKviz;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class KorakPoKorak {
+    static int interval;
+    static Timer timer;
 
-    ExecutorService service = Executors.newSingleThreadExecutor();
-   // try{
-        Runnable r = new Runnable() {
-            @Override
+    public static void main(String[] args) {
+
+        String secs = "25";
+        int delay = 1000;
+        int period = 1000;
+        timer = new Timer();
+        interval = Integer.parseInt(secs);
+        System.out.print("\r" + secs);
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+
             public void run() {
-                //database task
-            }
-        };
-        Future<?> f = service.submit(r);
-       // f.get(25, TimeUnit.SECONDS);
+                System.out.print("\r" + setInterval());
 
+            }
+        }, delay, period);
     }
 
+    private static final int setInterval() {
+        if (interval == 1)
+            timer.cancel();
+        return --interval;
+    }
+}
