@@ -1,35 +1,43 @@
 package SlagalicaKviz;
 
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimerApp{
-    boolean running = false;
+public class TimerApp {
+    static int interval;
+    static Timer timer;
 
+    public static void startTimer() {
 
+        String secs = "5";
+        int delay = 1000;
+        int period = 1000;
+        timer = new Timer();
+        interval = Integer.parseInt(secs);
+        System.out.print("\r" + secs);
 
-public static void timerStart() {
+        timer.scheduleAtFixedRate(new TimerTask() {
 
-        //timer
-        if(running == false)
-        {
+            public void run() {
 
-        TimerTask task = new TimerTask()
-        {
+                System.out.print("\r" + setInterval());
 
+            }
+        }, delay, period);
+    }
 
-public void run()
-        {
-        //what to do at each excecution
-        seconds++;
-        lbl.setText(Short.toString(seconds));
-        }
-        };
+    private static final int setInterval() {
+        if (interval == 1) {
+            timer.cancel();
+            }
+        return --interval;
+    }
 
-        timer.scheduleAtFixedRate(task,1000,1000);
-        }
-        running = true;
-        }
+    public static void stopTimer(){
+        timer.cancel();
+    }
+}
 
 
 
